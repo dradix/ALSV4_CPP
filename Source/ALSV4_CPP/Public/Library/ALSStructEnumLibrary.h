@@ -302,6 +302,9 @@ private:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
 	bool Barrel_ = false;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = true))
+	bool BigWeapon_ = false;
 
 public:
 	FALSOverlayState() {}
@@ -320,6 +323,7 @@ public:
 	FORCEINLINE const bool& Binoculars() const { return Binoculars_; }
 	FORCEINLINE const bool& Box() const { return Box_; }
 	FORCEINLINE const bool& Barrel() const { return Barrel_; }
+	FORCEINLINE const bool& BigWeapon() const { return BigWeapon_; }
 
 	FORCEINLINE operator EALSOverlayState() const { return State; }
 
@@ -339,6 +343,7 @@ public:
 		Binoculars_ = State == EALSOverlayState::Binoculars;
 		Box_ = State == EALSOverlayState::Box;
 		Barrel_ = State == EALSOverlayState::Barrel;
+		BigWeapon_ = State == EALSOverlayState::BigWeapon;
 	}
 };
 

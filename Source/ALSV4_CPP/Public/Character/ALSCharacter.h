@@ -32,7 +32,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ALS|HeldObject")
 	void AttachToHand(UStaticMesh* NewStaticMesh, USkeletalMesh* NewSkeletalMesh,
-	                  class UClass* NewAnimClass, bool bLeftHand, FVector Offset);
+	                  class UClass* NewAnimClass, bool bLeftHand, FVector Offset, FRotator RotationOffset);
+
+	void AttachActorToHand(AActor* Object, bool bLeftHand, FVector Offset, FRotator RotationOffset);
 
 	virtual void RagdollStart() override;
 

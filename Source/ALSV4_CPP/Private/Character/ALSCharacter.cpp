@@ -32,8 +32,10 @@ void AALSCharacter::ClearHeldObject()
 	SkeletalMesh->SetAnimInstanceClass(nullptr);
 }
 
+
+
 void AALSCharacter::AttachToHand(UStaticMesh* NewStaticMesh, USkeletalMesh* NewSkeletalMesh, UClass* NewAnimClass,
-                                 bool bLeftHand, FVector Offset)
+                                 bool bLeftHand, FVector Offset, FRotator RotationOffset)
 {
 	ClearHeldObject();
 
@@ -63,6 +65,35 @@ void AALSCharacter::AttachToHand(UStaticMesh* NewStaticMesh, USkeletalMesh* NewS
 	HeldObjectRoot->AttachToComponent(GetMesh(),
 	                                  FAttachmentTransformRules::SnapToTargetNotIncludingScale, AttachBone);
 	HeldObjectRoot->SetRelativeLocation(Offset);
+	HeldObjectRoot->SetRelativeRotation(RotationOffset);
+}
+
+void AALSCharacter::AttachActorToHand(AActor* Object, bool bLeftHand, FVector Offset, FRotator RotationOffset)
+{
+	ClearHeldObject();
+
+	if(!IsValid(Object))
+	{
+		return;		
+	}
+
+	
+	FName AttachBone;
+	if (bLeftHand)
+	{
+		AttachBone = TEXT("VB LHS_ik_hand_gun");
+	}
+	else
+	{
+		AttachBone = TEXT("VB RHS_ik_hand_gun");
+	}
+
+	Object->AttachToComponent(GetMesh(),
+                                      FAttachmentTransformRules::SnapToTargetIncludingScale, AttachBone);
+	Object->SetActorRelativeRotation(RotationOffset);
+	Object->SetActorRelativeLocation(Offset);
+	
+	
 }
 
 void AALSCharacter::RagdollStart()
